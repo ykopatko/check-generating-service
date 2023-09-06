@@ -16,7 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from check_service import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("new_order/", views.NewOrderView.as_view(), name="new_order"),
+    path("checks/<str:api_key>/", views.ChecksForPrinterView.as_view(), name="checks_for_printer"),
+    path("download_pdf/<int:check_id>/", views.DownloadPDFView.as_view(), name="download_pdf"),
 ]
