@@ -31,6 +31,19 @@ services:
     ports:
       - "6380:6379"
 
+  celery:
+    build:
+      context: .
+    command: celery -A core worker --loglevel=info
+    volumes:
+      - ./:/app
+    depends_on:
+      - redis
+      - db
+    env_file:
+      - .env
+
+
   wkhtmltopdf:
     image: "openlabs/docker-wkhtmltopdf:latest"
 
